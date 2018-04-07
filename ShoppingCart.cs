@@ -15,5 +15,14 @@ namespace MicroShoppingCart
         eventStore.Raise("ShoppingCartItemAdded", new { UserId, item });
       }
     }
+
+    public void RemoveItems(IEnumerable<ShoppingCartItem> shoppingCartItems, IEventStore eventStore)
+    {
+      foreach (var item in shoppingCartItems)
+      {
+        this.items.Remove(item);
+        eventStore.Raise("ShoppingCartItemRemoved", new { UserId, item });
+      }
+    }
   }
 }
